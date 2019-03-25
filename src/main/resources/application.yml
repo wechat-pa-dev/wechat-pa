@@ -1,1 +1,9 @@
-
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    servlet:
+      path: /
+server:
+  port: 8080
