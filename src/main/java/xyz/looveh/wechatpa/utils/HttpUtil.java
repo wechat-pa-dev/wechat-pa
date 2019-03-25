@@ -34,6 +34,48 @@ public class HttpUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+
+        String unicode = "\\u53cc\\u8282\\u671f\\u95f4\\u5feb\\u9012\\u9ad8\\u5cf0\\uff0c\\u4e3a" +
+                "\\u907f\\u514d\\u8d27\\u7269\\u4e2d\\u9014\\u4e22\\u5931\\uff0c\\u6211\\u516c" +
+                "\\u53f8\\u5c06\\u4e8e\\u31\\u30\\u6708\\u31\\u65e5\\u8d77\\u505c\\u6b62\\u66" +
+                "\\u61\\u68\\u75\\u6f\n";
+
+        String cn = "双节期间快递高峰，为避免货物中途丢失，我公司将于10月1日起停止发货";
+        String s = cnToUnicode(cn);
+        System.out.println(s);
+        String s1 = unicodeToCn(s);
+        System.out.println(s1);
+    }
+
+    /**
+     * 中文转Unicode
+     *
+     * @param cn
+     * @return
+     */
+    public static String cnToUnicode(String cn) {
+        StringBuilder sb = new StringBuilder();
+        char[] chars = cn.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            sb.append("\\u" + Integer.toString(chars[i], 16));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Unicode转中文
+     *
+     * @param unicode
+     * @return
+     */
+    public static String unicodeToCn(String unicode) {
+        String result = "";
+        String[] split = unicode.split("\\\\u");
+        for (int i = 1; i < split.length; i++) {
+            Integer integer = Integer.valueOf(split[i], 16);
+            result += (char) integer.intValue();
+        }
+        return result;
     }
 
     /**
@@ -51,7 +93,7 @@ public class HttpUtil {
             Elements elementsByClass = doc.getElementsByClass("result-game-item");
             String attr = elementsByClass.get(0).getElementsByTag("a").get(0).attr("href");
             doc = Jsoup.connect(attr).get();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return doc;
