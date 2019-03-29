@@ -56,8 +56,11 @@ public class WeChatCoreServiceImpl implements WeChatCoreService {
 //            textMessage.setCreateTime(formatDate);
 
             if(WechatMessageUtil.REQ_MESSAGE_TYPE_TEXT.equals(msgType)){
-                respMessage = WechatMessageUtil.textMessageToXml(textMessage);
+
+            }else{
+                textMessage.setContent("目前不支持该消息类型！");
             }
+            respMessage = WechatMessageUtil.textMessageToXml(textMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }
