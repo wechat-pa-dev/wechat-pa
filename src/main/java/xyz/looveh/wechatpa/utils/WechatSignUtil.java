@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import xyz.looveh.wechatpa.cache.RedisCacheManager;
 import xyz.looveh.wechatpa.constant.RedisKeyConstant;
 
 import java.security.MessageDigest;
@@ -34,6 +35,9 @@ public class WechatSignUtil {
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    RedisCacheManager redisCacheManager;
 
     /**
      * 验签
@@ -105,7 +109,7 @@ public class WechatSignUtil {
      */
     public String getAccessToken(){
         String accessToken;
-        accessToken = (String) redisTemplate.opsForValue().get(RedisKeyConstant.ACCESS_TOKEN);
+        accessToken = (String) redisCacheManager.get(RedisKeyConstant.ACCESS_TOKEN);
         logger.info("redis中accessToken>>>>>>>>>>>>" + accessToken);
         if(StringUtils.isEmpty(accessToken)) {
             String url = GET_ACCESS_TOKEN_URL.replace("APPID", appId).replace("APPSECRET", secret);
@@ -113,7 +117,7 @@ public class WechatSignUtil {
 
             accessToken = HttpUtil.post(url);
             System.out.println("请求获取access_token返回值：" + accessToken);
-            redisTemplate.opsForValue().set(RedisKeyConstant.ACCESS_TOKEN, accessToken,7200, TimeUnit.SECONDS);
+            redisCacheManager.set(RedisKeyConstant.ACCESS_TOKEN, accessToken,7200L);
         }
         return accessToken;
     }
