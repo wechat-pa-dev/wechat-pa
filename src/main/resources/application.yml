@@ -5,5 +5,13 @@ spring:
       suffix: .jsp
     servlet:
       path: /
+  redis:
+    host: 139.224.112.141
+    port: 6379
 server:
   port: 8080
+
+wechat:
+  token: looveh1006
+  appid: wxe15fc639a6557325
+  appsecret: fce2829c908cb5e70a0bb9d701ab50bd

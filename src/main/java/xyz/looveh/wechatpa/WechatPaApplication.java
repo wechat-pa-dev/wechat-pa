@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import xyz.looveh.wechatpa.utils.HttpUtil;
+import xyz.looveh.wechatpa.utils.ReptileUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,8 +32,8 @@ public class WechatPaApplication {
     public Map<String,String> seeBook(String bookName, Integer chapter){
         Map<String, String> result = new HashMap<>(1);
         try {
-            Document document = HttpUtil.get(bookName);
-            Map<String, String> chapter1 = HttpUtil.getChapter(document, chapter);
+            Document document = ReptileUtil.get(bookName);
+            Map<String, String> chapter1 = ReptileUtil.getChapter(document, chapter);
             Set<Map.Entry<String, String>> entries = chapter1.entrySet();
             Iterator<Map.Entry<String, String>> iterator = entries.iterator();
             while (iterator.hasNext()) {
