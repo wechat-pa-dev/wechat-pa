@@ -8,12 +8,14 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.springframework.util.CollectionUtils;
 import xyz.looveh.wechatpa.resp.ImageMessage;
 import xyz.looveh.wechatpa.resp.TextMessage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +91,21 @@ public class WechatMessageUtil {
      * 事件类型：CLICK(自定义菜单点击事件)
      */
     public static final String EVENT_TYPE_CLICK = "CLICK";
+
+
+    /**
+     * 关键词数组
+     */
+    public static final List<String> KEYWORDS = CollectionUtils.arrayToList(new String[]{"点歌 ","小说 ","视频 "});
+
+    /**
+     * 被关注自动恢复
+     */
+    public static final String WELCOME = "感谢关注程序猿Looveh！\n\r你可以在下方文本框中输入以下选项：\n\r" +
+            "① 点歌+名称\n\r② 小说+空格+名称\n\r③ 视频+空格+名称\n\n\n举个栗子：点歌 一百万个可能\n\r\n\r\n\r"+
+            "tips:不要忘记中间的空格哟！有更多建议请联系微信【MrRohwei】!!!\n\r欢迎来访";
+
+    public static final String UNIDENTIFIABLE = "我还不理解你的意思呢！要不试一下\r【点歌+空格+名称】\r或者\r【小说+空格+名称】\r或者\r【视频+空格+名称】\n\n\r例如：点歌 一百万个可能\n\n\rtips:不要忘记中间的空格哟！";
 
     /**
      * 解析微信发来的请求（XML）
