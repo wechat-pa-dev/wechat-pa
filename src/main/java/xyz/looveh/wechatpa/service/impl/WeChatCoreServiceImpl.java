@@ -88,6 +88,7 @@ public class WeChatCoreServiceImpl implements WeChatCoreService {
             //没有输入关键词
             if (key == null) {
                 textMessage.setContent(WechatMessageUtil.UNIDENTIFIABLE);
+                return textMessage;
             }
 
             //点歌
@@ -95,10 +96,11 @@ public class WeChatCoreServiceImpl implements WeChatCoreService {
                 getSong(content, textMessage);
             } else if (key.equals(WechatMessageUtil.KEYWORDS.get(1))) {
                 //根据书名查找
-                String result = HttpUtil.doGet(GET_BY_BOOKNAME_URL + content.substring(3));
-                System.err.println(result);
+                /*String result = HttpUtil.doGet(GET_BY_BOOKNAME_URL + content.substring(3));
+                System.err.println(result);*/
+                textMessage.setContent("该功能正在准备中....");
             } else {
-
+                textMessage.setContent("该功能正在准备中....");
             }
         } else if (WechatMessageUtil.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
             if (WechatMessageUtil.EVENT_TYPE_SUBSCRIBE.equals(map.get("Event"))) {
