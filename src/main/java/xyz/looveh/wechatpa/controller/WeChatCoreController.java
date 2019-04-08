@@ -55,7 +55,7 @@ public class WeChatCoreController {
         return "";
     }*/
 
-    @RequestMapping(value = "/access")
+    @RequestMapping(value = "/access", method = RequestMethod.POST)
     public String getWeChatMessage(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
         logger.info("--------------------开始处理微信发过来的消息--------------------");
 

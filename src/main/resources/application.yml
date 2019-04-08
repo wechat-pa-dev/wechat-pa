@@ -11,7 +11,9 @@ spring:
 server:
   port: 8080
 
+#wxe15fc639a6557325
+#fce2829c908cb5e70a0bb9d701ab50bd
 wechat:
   token: looveh1006
-  appid: wxe15fc639a6557325
-  appsecret: fce2829c908cb5e70a0bb9d701ab50bd
+  appid: wx4ba97b3096ef3d1b
+  appsecret: 2e9b4be6ba4da3797b23869cebda5346

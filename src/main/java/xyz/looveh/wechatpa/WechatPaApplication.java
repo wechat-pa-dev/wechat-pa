@@ -3,6 +3,8 @@ package xyz.looveh.wechatpa;
 import org.jsoup.nodes.Document;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.looveh.wechatpa.utils.ReptileUtil;
@@ -15,10 +17,15 @@ import java.util.Set;
 
 @SpringBootApplication
 @RestController
-public class WechatPaApplication {
+public class WechatPaApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(WechatPaApplication.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(WechatPaApplication.class);
     }
 
     @RequestMapping("/")

@@ -19,6 +19,13 @@
 <p id="content">
 
 </p>
+
+
+上传文件：<input type="file" name="file" id="file" />
+<h4>预览</h4>
+<div id="previewImg">
+
+</div>
 </body>
 </html>
 <script>
